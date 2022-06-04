@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global */
+      :root {
+        /* Colors */
+        --almost-white: hsl(0, 0%, 98%);
+        --medium-gray: hsl(0, 0%, 41%);
+        --almost-Black: hsl(0, 0%, 8%);
+
+        /* Font */
+        --Epilogue: "Epilogue", serif;
+
+        /* Font Size */
+        --font-base-paragraph: 1em;
+
+        /* break-points */
+        --break-mobile: 375px;
+        --break-tablet: 768px;
+        --break-desktop: 1024px;
+      }
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
