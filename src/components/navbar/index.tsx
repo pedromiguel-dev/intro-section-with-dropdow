@@ -4,7 +4,7 @@ import styled from "styled-components";
 //@ts-ignore
 import LogoSnap from "../../../assets/logo/logo.svg";
 import Button from "../buttons";
-import NavButtons from "../nav-button";
+import NavButtons from "./nav-button";
 
 const Nav = styled.nav`
   display: flex;
@@ -35,9 +35,6 @@ const GridContainer = styled.div`
     }
   }
 `;
-const ImageLogo = styled.img`
-  width: clamp(100px, 100vh, 110px);
-`;
 const ButtonsList = styled.ul`
   display: flex;
   align-items: center;
@@ -48,7 +45,20 @@ const ButtonsList = styled.ul`
   height: 100%;
   width: 100%;
 `;
-
+const dropItens = [
+  <React.Fragment key={"todo"}>
+    <a href="#">Todo list</a>
+  </React.Fragment>,
+  <React.Fragment key={"cal"}>
+    <a href="#">Calendar</a>
+  </React.Fragment>,
+  <React.Fragment key={"reminder"}>
+    <a href="#">Reminders</a>
+  </React.Fragment>,
+  <React.Fragment key={"plan"}>
+    <a href="#">Planing</a>
+  </React.Fragment>,
+];
 const NavBar = () => {
   return (
     <Nav>
@@ -62,17 +72,21 @@ const NavBar = () => {
             justifyContent: "center",
           }}
         >
-          <ImageLogo src={LogoSnap} alt="Snap company website" />
+          <img
+            style={{ width: "clamp(100px, 100vh, 110px)" }}
+            src={LogoSnap}
+            alt="Snap company website"
+          />
         </div>
         <div className="List" style={{ gridArea: "List" }}>
           <ButtonsList>
             <li>
-              <NavButtons>
+              <NavButtons hasDropdown dropItens={dropItens} isActive>
                 <a href="#">Features</a>
               </NavButtons>
             </li>
             <li>
-              <NavButtons>
+              <NavButtons hasDropdown dropItens={dropItens} isActive>
                 <a href="#">Company</a>
               </NavButtons>
             </li>
