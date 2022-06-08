@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 //@ts-ignore
 import styled from "styled-components";
 //@ts-ignore
@@ -45,23 +45,11 @@ const ButtonsList = styled.ul`
   height: 100%;
   width: 100%;
 `;
-const dropItens = [
-  <React.Fragment key={"todo"}>
-    <a href="#">Todo list</a>
-  </React.Fragment>,
-  <React.Fragment key={"cal"}>
-    <a href="#">Calendar</a>
-  </React.Fragment>,
-  <React.Fragment key={"reminder"}>
-    <a href="#">Reminders</a>
-  </React.Fragment>,
-  <React.Fragment key={"plan"}>
-    <a href="#">Planing</a>
-  </React.Fragment>,
-];
+const dropItens = ["Todo list", "Calendar", "Reminders", "Planing"];
+
 const NavBar = () => {
   return (
-    <Nav>
+    <Nav data-testid="navbar">
       <GridContainer>
         <div
           className="Logo"
@@ -81,12 +69,12 @@ const NavBar = () => {
         <div className="List" style={{ gridArea: "List" }}>
           <ButtonsList>
             <li>
-              <NavButtons hasDropdown dropItens={dropItens} isActive>
+              <NavButtons hasDropdown dropItens={dropItens}>
                 <a href="#">Features</a>
               </NavButtons>
             </li>
             <li>
-              <NavButtons hasDropdown dropItens={dropItens} isActive>
+              <NavButtons hasDropdown dropItens={dropItens}>
                 <a href="#">Company</a>
               </NavButtons>
             </li>

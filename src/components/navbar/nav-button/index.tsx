@@ -6,8 +6,10 @@ import dropDown from "../../../../assets/icons/icon-arrow-down.svg";
 interface NavButtonProps {
   hasDropdown?: boolean;
   isActive?: boolean;
-  dropItens?: React.ReactNode[];
+  dropItens?: string[];
   children: React.ReactNode;
+  onClick?: () => void;
+  id?: string;
 }
 
 const Buttons = styled.button<NavButtonProps>`
@@ -18,14 +20,17 @@ const Buttons = styled.button<NavButtonProps>`
   outline: none;
   padding: 1em;
   font-size: 0.8em;
+
   & > a {
     color: var(--medium-gray);
     cursor: pointer;
     text-decoration: none;
-
-    &:hover {
-      color: var(--almost-black);
-    }
+  }
+  &:hover > ul {
+    display: flex !important;
+  }
+  &:hover > a {
+    color: var(--almost-black);
   }
 
   font-size: var(--font-base-paragraph);
@@ -45,7 +50,7 @@ const Buttons = styled.button<NavButtonProps>`
 const Dropdown = styled.ul`
   position: absolute;
   right: 0;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-evenly;
   gap: 5px;
@@ -57,15 +62,28 @@ const Dropdown = styled.ul`
   list-style: none;
   background-color: var(--almost-white);
   border-radius: 10px;
+
+  & > li {
+    padding: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    box-radius: 5px;
+    color: var(--medium-gray);
+    &:hover {
+      background-color: var(--light-gray);
+    }
+  }
 `;
 const NavButtons = (props: NavButtonProps) => {
-  console.log(props);
-
   return (
-    <Buttons>
+    <Buttons hasDropdown={props.hasDropdown}>
       {props.children}
-      {props.hasDropdown && props.isActive && (
-        <Dropdown>{props.dropItens}</Dropdown>
+      {props.hasDropdown && (
+        <Dropdown>
+          {props.dropItens?.map((item) => (
+            <li>{item}</li>
+          ))}
+        </Dropdown>
       )}
     </Buttons>
   );
