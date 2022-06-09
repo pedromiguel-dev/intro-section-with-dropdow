@@ -81,7 +81,7 @@ const NavButtons = (props: NavButtonProps) => {
       {props.hasDropdown && (
         <Dropdown>
           {props.dropItens?.map((item) => (
-            <li>{item}</li>
+            <li key={item}>{item}</li>
           ))}
         </Dropdown>
       )}
