@@ -18,7 +18,8 @@ const Nav = styled.nav`
   align-items: center;
 
   height: clamp(60px, 100vh, 80px);
-  margin: 15px 20px 0 20px;
+  margin-left: 1rem;
+  margin-right: 1rem;
   background-color: #fff;
 `;
 const GridContainer = styled.div`
@@ -80,7 +81,7 @@ const Menu = styled.button`
 const dropItens = ["Todo list", "Calendar", "Reminders", "Planing"];
 
 const NavBar = () => {
-  const [isOpen, setIsOpen] = React.useState(true);
+  const [isOpen, setIsOpen] = React.useState(false);
   useEffect(() => {
     console.log("isOpen", isOpen);
   });
@@ -146,7 +147,11 @@ const NavBar = () => {
           </div>
         </GridContainer>
       </Nav>
-      <SideBar isShowing={isOpen} onClick={() => setIsOpen(false)} />
+      <SideBar
+        isShowing={isOpen}
+        onClick={() => setIsOpen(false)}
+        dropItens={dropItens}
+      />
     </>
   );
 };

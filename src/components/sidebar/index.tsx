@@ -3,6 +3,10 @@ import React from "react";
 import iconCloseMenu from "../../../assets/icons/icon-close-menu.svg";
 //@ts-ignore
 import styled from "styled-components";
+//@ts-ignore
+import arowDown from "../../../assets/icons/icon-arrow-down.svg";
+//@ts-ignore
+import arrowUp from "../../../assets/icons/icon-arrow-up.svg";
 
 const Shadow = styled.div`
   transition: all 0.3s ease-in-out;
@@ -20,22 +24,23 @@ const Shadow = styled.div`
 `;
 const Container = styled.div<State>`
   will-change: transform;
-  transition: all 0.3s ease-in-out;
   z-index: 2;
-  will-change: transform drop-shadow;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  width: clamp(220px, 50vw, 400px);
+  width: clamp(230px, 50vw, 400px);
   height: 100vh;
   position: fixed;
   inset: 0 0 0 auto;
-  background-color: blue;
+  background-color: var(--almost-white);
+  padding: 0 1rem;
+  transition: all 0.3s ease-in-out;
 
   transform: ${(props: State) =>
     props.isShowing
-      ? "translateX(-1px)"
-      : "translateX(clamp(220px, 50vw, 400px))"};
+      ? "translateX(-0px)"
+      : "translateX(clamp(240px, 50vw, 410px))"};
 
   @media (min-width: 768px) {
     transform: translateX(100%) !important;
@@ -46,9 +51,43 @@ const Menu = styled.button`
   border: none;
   cursor: pointer;
 `;
+const Colapsable = styled.details<{}>`
+  width: 100%;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+
+  & summary {
+    margin: 10px 0;
+    display: flex;
+    position: relative;
+  }
+  & summary::after {
+    content: url(${arowDown});
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &[open] summary::after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+  & > ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 5px;
+
+    list-style: none;
+  }
+`;
 
 interface Props {
   isShowing: boolean;
+  dropItens: string[];
   onClick: () => void;
 }
 
@@ -56,15 +95,38 @@ interface State {
   isShowing: boolean;
 }
 
-const SideBar = ({ isShowing, onClick }: Props) => {
+const SideBar = (props: Props) => {
   return (
     <>
-      <Shadow isShowing={isShowing} />
-      <Container isShowing={isShowing}>
-        <Menu aria-label="Abrir Menu" onClick={onClick}>
-          <img src={iconCloseMenu} alt="Menu" />
-        </Menu>
-        <h1>SideBar</h1>
+      <Shadow isShowing={props.isShowing} />
+      <Container isShowing={props.isShowing}>
+        <div
+          style={{
+            height: "clamp(60px,100vh,80px)",
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Menu
+            aria-label="Abrir Menu"
+            onClick={props.onClick}
+            style={{
+              height: "fit-content",
+              alignSelf: "center",
+            }}
+          >
+            <img src={iconCloseMenu} alt="Menu" />
+          </Menu>
+        </div>
+        <Colapsable>
+          <summary>Menu</summary>
+          <ul>
+            {props.dropItens?.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </Colapsable>
       </Container>
     </>
   );
