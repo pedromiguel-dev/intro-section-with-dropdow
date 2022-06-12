@@ -31,7 +31,7 @@ const Buttons = styled.button<NavButtonProps>`
     cursor: pointer;
     text-decoration: none;
   }
-  &:hover > ul {
+  &:hover > div.dropdown {
     display: flex !important;
   }
   &:hover > a {
@@ -52,28 +52,28 @@ const Buttons = styled.button<NavButtonProps>`
     transition: transform 0.2s ease-in-out;
   }
 `;
-const Dropdown = styled.ul`
+const Dropdown = styled.div`
+  display: none;
   position: absolute;
   right: 0;
-  display: none;
-  flex-direction: column;
-  justify-content: space-evenly;
-  gap: 5px;
-  padding: 5px 0;
-  margin: 10px 0 0 0;
-  min-width: 100px;
-  min-height: 100px;
-
-  list-style: none;
+  margin: 20px 0 0 0;
   background-color: var(--almost-white);
   border-radius: 10px;
+  box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.2);
 
-  & > li {
+  & ul {
+    margin: 20px;
+    min-width: 70px;
+  }
+
+  & ul > li {
+    display: flex;
+    gap: 8px;
     padding: 5px;
     font-size: 12px;
-    cursor: pointer;
-    box-radius: 5px;
     color: var(--medium-gray);
+    box-radius: 5px;
+    cursor: pointer;
     &:hover {
       background-color: var(--light-gray);
     }
@@ -84,10 +84,15 @@ const NavButtons = (props: NavButtonProps) => {
     <Buttons hasDropdown={props.hasDropdown}>
       {props.children}
       {props.hasDropdown && (
-        <Dropdown>
-          {props.dropItens?.map((item) => (
-            <li key={item.name}>{item.name}</li>
-          ))}
+        <Dropdown className="dropdown">
+          <ul>
+            {props.dropItens?.map((item) => (
+              <li key={item.name}>
+                {item.icon && <img src={item.icon} alt={item.name} />}
+                {item.name}
+              </li>
+            ))}
+          </ul>
         </Dropdown>
       )}
     </Buttons>

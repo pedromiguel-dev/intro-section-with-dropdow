@@ -1,122 +1,57 @@
 import React, { useEffect, useId } from "react";
+import * as NavComponent from "./navbar-components";
 
-//@ts-ignore
-import styled from "styled-components";
-//@ts-ignore
-import LogoSnap from "../../../assets/logo/logo.svg";
-
-//@ts-ignore
-import iconMenu from "../../../assets/icons/icon-menu.svg";
+//dont really know why its point a error and i just gave up please help me 😭
+/*@ts-ignore*/
+/*@ts-ignore*/ import LogoSnap from "../../../assets/logo/logo.svg";
+/*@ts-ignore*/ import iconMenu from "../../../assets/icons/icon-menu.svg";
+/*@ts-ignore*/ import icCalendar from "../../../assets/icons/icon-calendar.svg";
+/*@ts-ignore*/ import icPlanning from "../../../assets/icons/icon-planning.svg";
+/*@ts-ignore*/ import icReminders from "../../../assets/icons/icon-reminders.svg";
+/*@ts-ignore*/ import icTodo from "../../../assets/icons/icon-todo.svg";
 
 import Button from "../buttons";
 import NavButtons from "./nav-button";
 import SideBar from "../sidebar";
 
-const Nav = styled.nav`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: clamp(60px, 100vh, 80px);
-  margin-left: 1rem;
-  margin-right: 1rem;
-  background-color: #fff;
-`;
-const GridContainer = styled.div`
-  --grid-template-areas: "Logo List Buttons";
-  --grid-template-columns: 1fr 4fr 1fr;
-  @media (max-width: 768px) {
-    --grid-template-areas: "Logo Hamburger";
-    --grid-template-columns: 4fr 1fr;
-  }
-
-  max-width: var(--break-desktop);
-  display: grid;
-  grid-template-areas: var(--grid-template-areas);
-  grid-template-columns: var(--grid-template-columns);
-  & > .Hamburger {
-    display: none;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-
-    & > .Hamburger {
-      display: block;
-      justify-self: end;
-    }
-    & > .List,
-    .Buttons {
-      display: none !important;
-    }
-  }
-`;
-const LogoContainer = styled.div`
-  --just-cont: center;
-  @media (max-width: 768px) {
-    --just-cont: flex-start;
-  }
-  grid-area: Logo;
-  display: flex;
-  align-items: center;
-  justify-content: var(--just-cont);
-`;
-const ButtonsList = styled.ul`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: clamp(0.5em, 2vw, 5em);
-  list-style: none;
-
-  height: 100%;
-  width: 100%;
-`;
-const Menu = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
 const dropItens: dropItensInterface = {
   Features: [
     {
       name: "Todo list",
-      icon: "",
-      link: "",
+      icon: icTodo,
+      link: "Eita bbsssss",
     },
     {
       name: "Calendar",
-      icon: "",
-      link: "",
+      icon: icCalendar,
+      link: "#",
     },
     {
       name: "Reminders",
-      icon: "",
-      link: "",
+      icon: icReminders,
+      link: "#",
     },
     {
       name: "Planing",
-      icon: "",
-      link: "",
+      icon: icPlanning,
+      link: "#",
     },
   ],
   Company: [
     {
       name: "History",
       icon: "",
-      link: "",
+      link: "#",
     },
     {
       name: "Our Team",
       icon: "",
-      link: "",
+      link: "#",
     },
     {
       name: "Blog",
       icon: "",
-      link: "",
+      link: "#",
     },
   ],
   Careers: [],
@@ -133,34 +68,34 @@ interface dropItensInterface {
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-  useEffect(() => {
-    console.log("isOpen", isOpen);
-  });
   return (
     <>
-      <Nav data-testid="navbar">
-        <GridContainer>
-          <LogoContainer aria-label="Snap Company WebSite" className="Logo">
+      <NavComponent.Nav data-testid="navbar">
+        <NavComponent.GridContainer>
+          <NavComponent.LogoContainer
+            aria-label="Snap Company WebSite"
+            className="Logo"
+          >
             <img
               style={{ width: "clamp(100px, 100vh, 110px)" }}
               src={LogoSnap}
               alt="Snap company website"
             />
-          </LogoContainer>
+          </NavComponent.LogoContainer>
           <div className="List" style={{ gridArea: "List" }}>
-            <ButtonsList>
-              {Object.keys(dropItens).map((item) => (
+            <NavComponent.ButtonsList>
+              {Object.keys(dropItens).map((item, index) => (
                 <li key={item}>
                   <NavButtons
                     key={item}
                     hasDropdown={dropItens[item].length == 0 ? false : true}
                     dropItens={dropItens[item] ? dropItens[item] : []}
                   >
-                    <a href="">{item}</a>
+                    <a href={dropItens[item][index]?.link || "#"}>{item}</a>
                   </NavButtons>
                 </li>
               ))}
-            </ButtonsList>
+            </NavComponent.ButtonsList>
           </div>
           <div
             className="Buttons"
@@ -183,12 +118,15 @@ const NavBar = () => {
               width: "fit-content",
             }}
           >
-            <Menu aria-label="Abrir Menu" onClick={() => setIsOpen(true)}>
+            <NavComponent.Menu
+              aria-label="Abrir Menu"
+              onClick={() => setIsOpen(true)}
+            >
               <img src={iconMenu} alt="Menu" />
-            </Menu>
+            </NavComponent.Menu>
           </div>
-        </GridContainer>
-      </Nav>
+        </NavComponent.GridContainer>
+      </NavComponent.Nav>
       <SideBar
         isShowing={isOpen}
         onClick={() => setIsOpen(false)}

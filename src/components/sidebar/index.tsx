@@ -5,6 +5,7 @@ import iconCloseMenu from "../../../assets/icons/icon-close-menu.svg";
 import styled from "styled-components";
 //@ts-ignore
 import arowDown from "../../../assets/icons/icon-arrow-down.svg";
+import Button from "../buttons";
 
 const Shadow = styled.div`
   transition: all 0.3s ease-in-out;
@@ -15,7 +16,7 @@ const Shadow = styled.div`
   z-index: 1;
   background-color: rgba(0, 0, 0, var(--opacity));
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     --opacity: 0;
     visibility: hidden !important;
   }
@@ -40,7 +41,7 @@ const Container = styled.div<State>`
       ? "translateX(-0px)"
       : "translateX(clamp(240px, 50vw, 410px))"};
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     transform: translateX(100%) !important;
   }
 `;
@@ -51,9 +52,11 @@ const Menu = styled.button`
 `;
 const Colapsable = styled.details<{ hasDropdown: boolean }>`
   width: 100%;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
+  font-size: var(--font-base-paragraph);
+  font-family: Epilogue;
+  font-weight: 500;
+  color: var(--medium-gray);
+  padding: 0.5 0.3rem;
 
   & summary {
     margin: 10px 0;
@@ -75,12 +78,14 @@ const Colapsable = styled.details<{ hasDropdown: boolean }>`
   &[open] summary::after {
     transform: translateY(-50%) rotate(180deg);
   }
-  & > ul {
+  & ul {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: center;
-    gap: 5px;
+    align-items: flex-start;
+    width: fit-content;
+    gap: 15px;
+    margin: 15px 0;
 
     list-style: none;
   }
@@ -133,18 +138,41 @@ const SideBar = (props: Props) => {
             hasDropdown={props.dropItens[item].length == 0 ? false : true}
           >
             <summary>{item}</summary>
-            <ul>
-              {props.dropItens[item].map((dropItem, index) => (
-                <li key={index}>
-                  <a href={dropItem.link}>
-                    {/*<img src={dropItem.icon} alt={dropItem.name} />*/}
-                    {dropItem.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <ul>
+                {props.dropItens[item].map((dropItem, index) => (
+                  <li key={index}>
+                    <a
+                      href={dropItem.link}
+                      style={{
+                        textDecoration: "none",
+                        color: "var(--medium-gray)",
+                        fontSize: "var(--font-base-paragraph)",
+                        display: "flex",
+                        gap: "15px",
+                      }}
+                    >
+                      {dropItem.icon && (
+                        <img src={dropItem.icon} alt={dropItem.name} />
+                      )}
+                      {dropItem.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Colapsable>
         ))}
+        <Button>Login</Button>
+        <Button isOutlined style={{ width: "100%" }}>
+          Register
+        </Button>
       </Container>
     </>
   );

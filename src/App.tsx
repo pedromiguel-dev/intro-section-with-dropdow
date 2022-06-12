@@ -10,7 +10,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="*" element={<p>Eita bbs</p>} />
+          <Route
+            path="*"
+            element={
+              <p>Eita bbs essa pagina não existe || this page does not exist</p>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
