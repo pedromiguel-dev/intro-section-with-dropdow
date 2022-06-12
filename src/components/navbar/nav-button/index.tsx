@@ -3,10 +3,15 @@ import styled from "styled-components";
 //@ts-ignore
 import dropDown from "../../../../assets/icons/icon-arrow-down.svg";
 
+interface itemDropItensInterface {
+  name?: string;
+  icon?: string;
+  link?: string;
+}
 interface NavButtonProps {
   hasDropdown?: boolean;
   isActive?: boolean;
-  dropItens?: string[];
+  dropItens?: itemDropItensInterface[];
   children: React.ReactNode;
   onClick?: () => void;
   id?: string;
@@ -81,7 +86,7 @@ const NavButtons = (props: NavButtonProps) => {
       {props.hasDropdown && (
         <Dropdown>
           {props.dropItens?.map((item) => (
-            <li key={item}>{item}</li>
+            <li key={item.name}>{item.name}</li>
           ))}
         </Dropdown>
       )}

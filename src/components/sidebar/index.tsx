@@ -5,8 +5,6 @@ import iconCloseMenu from "../../../assets/icons/icon-close-menu.svg";
 import styled from "styled-components";
 //@ts-ignore
 import arowDown from "../../../assets/icons/icon-arrow-down.svg";
-//@ts-ignore
-import arrowUp from "../../../assets/icons/icon-arrow-up.svg";
 
 const Shadow = styled.div`
   transition: all 0.3s ease-in-out;
@@ -51,7 +49,7 @@ const Menu = styled.button`
   border: none;
   cursor: pointer;
 `;
-const Colapsable = styled.details<{}>`
+const Colapsable = styled.details<{ hasDropdown: boolean }>`
   width: 100%;
   font-size: 1.2rem;
   margin-bottom: 1rem;
@@ -61,8 +59,11 @@ const Colapsable = styled.details<{}>`
     margin: 10px 0;
     display: flex;
     position: relative;
+    cursor: pointer;
   }
   & summary::after {
+    display: ${(props: { hasDropdown: boolean }) =>
+      props.hasDropdown ? "block" : "none"};
     content: url(${arowDown});
     position: absolute;
     right: 0;
@@ -87,8 +88,15 @@ const Colapsable = styled.details<{}>`
 
 interface Props {
   isShowing: boolean;
-  dropItens: string[];
+  dropItens: dropItensInterface;
   onClick: () => void;
+}
+interface dropItensInterface {
+  [key: string]: {
+    name?: string;
+    icon?: string;
+    link?: string;
+  }[];
 }
 
 interface State {
@@ -119,14 +127,24 @@ const SideBar = (props: Props) => {
             <img src={iconCloseMenu} alt="Menu" />
           </Menu>
         </div>
-        <Colapsable>
-          <summary>Menu</summary>
-          <ul>
-            {props.dropItens?.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </Colapsable>
+        {Object.keys(props.dropItens).map((item: string, index) => (
+          <Colapsable
+            key={item}
+            hasDropdown={props.dropItens[item].length == 0 ? false : true}
+          >
+            <summary>{item}</summary>
+            <ul>
+              {props.dropItens[item].map((dropItem, index) => (
+                <li key={index}>
+                  <a href={dropItem.link}>
+                    {/*<img src={dropItem.icon} alt={dropItem.name} />*/}
+                    {dropItem.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Colapsable>
+        ))}
       </Container>
     </>
   );

@@ -78,7 +78,58 @@ const Menu = styled.button`
   border: none;
   cursor: pointer;
 `;
-const dropItens = ["Todo list", "Calendar", "Reminders", "Planing"];
+
+const dropItens: dropItensInterface = {
+  Features: [
+    {
+      name: "Todo list",
+      icon: "",
+      link: "",
+    },
+    {
+      name: "Calendar",
+      icon: "",
+      link: "",
+    },
+    {
+      name: "Reminders",
+      icon: "",
+      link: "",
+    },
+    {
+      name: "Planing",
+      icon: "",
+      link: "",
+    },
+  ],
+  Company: [
+    {
+      name: "History",
+      icon: "",
+      link: "",
+    },
+    {
+      name: "Our Team",
+      icon: "",
+      link: "",
+    },
+    {
+      name: "Blog",
+      icon: "",
+      link: "",
+    },
+  ],
+  Careers: [],
+  About: [],
+};
+
+interface dropItensInterface {
+  [key: string]: {
+    name?: string;
+    icon?: string;
+    link?: string;
+  }[];
+}
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -98,26 +149,17 @@ const NavBar = () => {
           </LogoContainer>
           <div className="List" style={{ gridArea: "List" }}>
             <ButtonsList>
-              <li>
-                <NavButtons hasDropdown dropItens={dropItens}>
-                  <a href="#">Features</a>
-                </NavButtons>
-              </li>
-              <li>
-                <NavButtons hasDropdown dropItens={dropItens}>
-                  <a href="#">Company</a>
-                </NavButtons>
-              </li>
-              <li>
-                <NavButtons>
-                  <a href="#">Careers</a>
-                </NavButtons>
-              </li>
-              <li>
-                <NavButtons>
-                  <a href="#">About</a>
-                </NavButtons>
-              </li>
+              {Object.keys(dropItens).map((item) => (
+                <li key={item}>
+                  <NavButtons
+                    key={item}
+                    hasDropdown={dropItens[item].length == 0 ? false : true}
+                    dropItens={dropItens[item] ? dropItens[item] : []}
+                  >
+                    <a href="">{item}</a>
+                  </NavButtons>
+                </li>
+              ))}
             </ButtonsList>
           </div>
           <div
