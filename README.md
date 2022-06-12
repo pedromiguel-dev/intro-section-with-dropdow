@@ -113,10 +113,6 @@ Omg imports were a pain, need to study more bout implementations with vite i gue
 - Frontend Mentor - [@pedromiguel-dev](https://www.frontendmentor.io/profile/pedromiguel-dev)
 - Twitter - [@PrincesaSofiaQA](https://twitter.com/PrincesaSofiaQA)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
 ## Acknowledgments
 
 Thanks a lot to stackoverflow for beeing part of this
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
