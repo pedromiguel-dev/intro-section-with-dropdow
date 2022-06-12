@@ -10,7 +10,7 @@ const Nav = styled.nav`
   height: clamp(60px, 20vh, 80px);
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: #fff;
+  background-color: var(--almost-white);
   z-index: 1;
 `;
 const GridContainer = styled.div`
@@ -21,7 +21,7 @@ const GridContainer = styled.div`
     --grid-template-columns: 4fr 1fr;
   }
 
-  max-width: var(--break-desktop);
+  max-width: 1300px;
   display: grid;
   grid-template-areas: var(--grid-template-areas);
   grid-template-columns: var(--grid-template-columns);
