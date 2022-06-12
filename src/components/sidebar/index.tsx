@@ -59,10 +59,14 @@ const Colapsable = styled.details<{ hasDropdown: boolean }>`
   padding: 0.5 0.3rem;
 
   & summary {
+    list-style: none;
     margin: 10px 0;
     display: flex;
     position: relative;
     cursor: pointer;
+  }
+  & summary::-webkit-details-marker {
+    display: none;
   }
   & summary::after {
     display: ${(props: { hasDropdown: boolean }) =>
